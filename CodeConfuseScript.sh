@@ -1,10 +1,21 @@
 #!/usr/bin/env bash
+
+ramdomString() {
+index=0
+str=""
+for i in {a..z}; do arr[index]=$i; index=`expr ${index} + 1`; done
+for i in {A..Z}; do arr[index]=$i; index=`expr ${index} + 1`; done
+for i in {0..9}; do arr[index]=$i; index=`expr ${index} + 1`; done
+for i in {1..20}; do str="$str${arr[$RANDOM%$index]}"; done
+echo $str
+}
+
 #创建func.list文件并指定绝对路径
-STRING_SYMBOL_FILE="$PROJECT_DIR/JXMagicVoice/CodeConfusion/func.list"
+STRING_SYMBOL_FILE="$PROJECT_DIR/CodeConfusion/func.list"
 #工程文件夹目录，在根目录的里面一层
-CONFUSE_FILE="$PROJECT_DIR/JXMagicVoice"
+CONFUSE_FILE="$PROJECT_DIR/CodeConfusion"
 #创建codeObfuscation.h桥接文件并指定绝对路径
-HEAD_FILE="$PROJECT_DIR/JXMagicVoice/CodeConfusion/codeObfuscation.h"
+HEAD_FILE="$PROJECT_DIR/CodeConfusion/codeObfuscation.h"
 
 export LC_CTYPE=C
 
