@@ -9,7 +9,10 @@ HEAD_FILE="$PROJECT_DIR/JXMagicVoice/CodeConfusion/codeObfuscation.h"
 export LC_CTYPE=C
 
 #遍历工程中所有以"hsy_"为开头的方法，写入codeObfuscation.h文件和func.list文件
-grep -h -r -I  "^[-+]" $CONFUSE_FILE  --include '*.[mh]' |sed "s/[+-]//g"|sed "s/[();,: *\^\/\{]/ /g"|sed "s/[ ]*</</"| sed "/^[ ]*IBAction/d"|awk '{split($0,b," "); print b[2]; }'| sort|uniq |sed "/^$/d"|sed -n "/^hsy_/p" >$STRING_SYMBOL_FILE
+#grep -h -r -I  "^[-+]" $CONFUSE_FILE  --include '*.[mh]' |sed "s/[+-]//g"|sed "s/[();,: *\^\/\{]/ /g"|sed "s/[ ]*</</"| sed "/^[ ]*IBAction/d"|awk '{split($0,b," "); print b[2]; }'| sort|uniq |sed "/^$/d"|sed -n "/^hsy_/p" >$STRING_SYMBOL_FILE
+
+#遍历工程中的所有h文件，将所有方法名称全部写入list文件中
+grep -h -r -I  "^[-+]" $CONFUSE_FILE  --include '*.[h]' |sed "s/[+-]//g"|sed "s/[();,: *\^\/\{]/ /g"|sed "s/[ ]*</</"| sed "/^[ ]*IBAction/d"|awk '{split($0,b," "); print b[2]; }'| sort|uniq |sed "/^$/d" >$STRING_SYMBOL_FILE
 
 rm -f $HEAD_FILE
 
